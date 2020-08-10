@@ -1,7 +1,7 @@
 ---
 # Define the host you want to run the playbook in a file called hosts
 # run "ansible-playbook play.yml -i hosts" from this directory
-- hosts: all
+- hosts: localhost
   remote_user: root
   gather_facts: no
   pre_tasks:
@@ -13,7 +13,7 @@
       setup:
 
   vars:
-    mattermost_version: 4.3.2
+    mattermost_version: 5.20.1
     postgres_version: 9.4
 
    # The user the mattermost process will run as. The group will match.
