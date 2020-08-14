@@ -5,9 +5,32 @@
   remote_user: root
   gather_facts: no
   pre_tasks:
+
+      # - name: "USER | Creation de {{ user }}"
+      #   user: 
+      #     name: "{{ user}}"
+      #     shell: /bin/bash
+      # - name: USER | Cle SSH
+      #   authorized_key:
+      #   user: "{{ user }}"
+      #   state: present
+      #   key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+      # - name: "USER | Sudoers {{ user }}"
+      #   lineinfile:
+      #     dest: /etc/sudoers
+      #     state: present
+      #     regexp: "^{{ user }}"
+      #     line: '{{ user }} ALL=(ALL) NOPASSWORD: ALL'
+      #     validate: 'visudo -cf %s'
+
     - name: Install python
       raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
       changed_when: false
+
+    # - name: APT | Update & Upgrade
+    #   apt:
+    #     upgrade: dist
+    #     update_cache: yes
 
     - name: Gather Facts
       setup:
@@ -30,9 +53,12 @@
    # This is the email address you want to be attached to the letsencrypt certificate. It should be valid.
     cert_email_address: abc@123.com
 
-  #roles:
+
+    
+  roles:
+    #- firewall
     - postgres
-    - mattermost
-  #  - letsencrypt
+    #- mattermost
+    - letsencrypt
     - nginx
-  #  - cron
+    - cron

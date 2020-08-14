@@ -1,8 +1,13 @@
 ---
-- name: restart nginx
+# - name: restart nginx
+#   service:
+#     name: nginx
+#     state: restarted
+
+- name: nginx reload
   service:
     name: nginx
-    state: restarted
+    state: reloaded
 
 - name: start nginx
   service:
